@@ -89,7 +89,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
             TextViewHolder holder = (TextViewHolder) viewHolder;
             TextView txtDia = holder.txtDia;
 
-            txtDia.setText(aulas.get(listPosition).getDia());
+            txtDia.setText(" " + aulas.get(listPosition).getDia() + " ");
         }
     }
 

@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="40dp">
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/textView"
+        android:backgroundTint="#bdbdbd"
+        android:layout_gravity="center_horizontal"
+        android:background="#bdbdbd"
+        android:layout_marginTop="22dp"
+        android:layout_centerHorizontal="false" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Segunda"
+        android:text=" Segunda "
         android:id="@+id/txtDia2"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:background="#F5f5f5"
+        android:textColor="#757575"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="false" />
+
+</RelativeLayout>

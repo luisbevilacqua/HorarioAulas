@@ -9,7 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:background="#eeeeee"
+    android:background="#F5F5F5"
     tools:context="com.example.luis.aplicativo1.MainActivity">
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

@@ -11,9 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="110dp"
         card_view:cardCornerRadius="2dp"
-        card_view:cardElevation="3dp"
-        android:layout_margin="5dp"
-        android:clickable="true">
+        card_view:cardElevation="2dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:onClick="onCardClick"
+        android:foreground="?android:attr/selectableItemBackground">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -77,7 +82,7 @@
             <TextView
                 android:textSize="20sp"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="27dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Funções de Várias Variáveis"
                 android:id="@+id/txtMateria"
