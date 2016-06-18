@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     MyData.disciplina[i],MyData.professor[i],MyData.sala[i],MyData.dia[i]));
         }
 
-        adapter = new MyAdapter(aulas);
+        adapter = new MyAdapter(aulas, MyData.tipo);
         recyclerView.setAdapter(adapter);
     }
 }
