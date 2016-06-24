@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private static ArrayList<Aula> aulas;
     private static RecyclerView.Adapter adapter;
+    private int[] tipo = new int[50];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +30,18 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         aulas = new ArrayList<Aula>();
+        int j = 0;
         for(int i = 0; i < MyData.disciplina.length; i++){
+            if(i==0||!MyData.dia[i].equals(MyData.dia[i-1])){
+                aulas.add(new Aula("","","","","",MyData.dia[i]));
+                MyData.tipo[j]=1;
+                j++;
+            }
             aulas.add(new Aula(MyData.horas[i],MyData.minutos[i],
                     MyData.disciplina[i],MyData.professor[i],MyData.sala[i],MyData.dia[i]));
+            MyData.tipo[j] = 0;
+            j++;
         }
 
         adapter = new MyAdapter(aulas, MyData.tipo);
