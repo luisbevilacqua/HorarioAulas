@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,8 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new MyAdapter(aulas, MyData.tipo);
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerClickListener(this, new RecyclerClickListener.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(View view, int position){
+                        Log.d("DEBUG", "Chegou! Item: " + position);
+                    }
+                })
+        );
     }
     public void onCardClick(View view){
-        //Toast.makeText(this,"Teste",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Teste",Toast.LENGTH_SHORT).show();
     }
 }

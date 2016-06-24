@@ -16,9 +16,11 @@
         android:layout_marginLeft="7dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
+        android:focusable="true"
         android:clickable="true"
         android:onClick="onCardClick"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:foreground="?android:attr/selectableItemBackground"
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
