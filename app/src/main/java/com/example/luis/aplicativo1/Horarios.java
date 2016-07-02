@@ -73,4 +73,10 @@ public class Horarios extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+       // recyclerView.smoothScrollToPosition(12);
+    }
 }

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        int hour = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        Toast.makeText(this,"Hora: " + hour, Toast.LENGTH_SHORT).show();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
