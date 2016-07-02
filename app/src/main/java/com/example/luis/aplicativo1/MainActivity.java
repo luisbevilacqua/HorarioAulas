@@ -90,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
+        public float getPageWidth(int position){
+            if(position==0)
+                return(0.7f);
+            else
+                return 1;
+        }
+        @Override
         public CharSequence getPageTitle(int position) {
             return null;
         }
