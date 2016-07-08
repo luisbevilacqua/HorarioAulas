@@ -1,5 +1,6 @@
 package com.example.luis.aplicativo1;
 
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,11 +55,38 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(1);
     }
 
+    public void abrirOpcoes(View v){
+
+    }
+
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_black_24dp);
+        final DrawerArrowDrawable menu_hamburguer = new DrawerArrowDrawable(this);
+        menu_hamburguer.setColor(Color.parseColor("#FFFFFF"));
+        tabLayout.getTabAt(0).setIcon(menu_hamburguer);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_query_builder_black_24dp);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_directions_bus_black_24dp);
         tabLayout.getTabAt(3).setIcon(R.drawable.ic_restaurant_menu_black_24dp);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels){
+                if(position==0) {
+                    menu_hamburguer.setProgress(1-positionOffset);
+                }
+                else{
+                    menu_hamburguer.setProgress(0f);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position){
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state){
+
+            }
+        });
     }
 
     private void setupViewPager(ViewPager viewPager) {
