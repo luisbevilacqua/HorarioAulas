@@ -46,20 +46,26 @@ public class Horarios extends Fragment {
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        AcessoBD dbAcesso = AcessoBD.getInstance(this.getContext());
+        dbAcesso.open();
+
+        ArrayList<Aula> resultSet = dbAcesso.getAulas("11008415");
+
         aulas = new ArrayList<Aula>();
         int j = 0;
-        for(int i = 0; i < MyData.disciplina.length; i++){
-            if(i==0||!MyData.dia[i].equals(MyData.dia[i-1])){
-                aulas.add(new Aula("","","","","",MyData.dia[i]));
+        for(int i = 0; i < resultSet.size(); i++){
+            if(i==0||!resultSet.get(i).getDia().equals(resultSet.get(i-1).getDia())){
+                aulas.add(new Aula("","","","","",resultSet.get(i).getDia().substring(0,1).toUpperCase()+resultSet.get(i).getDia().substring(1)));
                 MyData.tipo[j]=1;
                 j++;
             }
-            aulas.add(new Aula(MyData.horas[i],MyData.minutos[i],
-                    MyData.disciplina[i],MyData.professor[i],MyData.sala[i],MyData.dia[i]));
+            aulas.add(resultSet.get(i));
             MyData.tipo[j] = 0;
             j++;
         }
 
+        dbAcesso.close();
         adapter = new MyAdapter(aulas, MyData.tipo);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(
