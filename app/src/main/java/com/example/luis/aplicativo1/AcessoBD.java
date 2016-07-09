@@ -41,6 +41,11 @@ public class AcessoBD {
                 "ORDER BY (CASE WHEN Dia = 'segunda' THEN 1 WHEN Dia = 'terca' THEN 2 WHEN Dia = 'quarta' THEN 3 WHEN Dia = 'quinta' THEN 4 WHEN Dia = 'sexta' THEN 5 WHEN Dia = 'sabado' THEN 6 END), Hora;",null);
         cursor.moveToFirst();
         ArrayList<Aula> resultSet = new ArrayList<>();
+        if(cursor.getCount()==0){
+            Aula aula = new Aula("00","00","NENHUMA AULA","","","Sem aulas");
+            resultSet.add(aula);
+            return resultSet;
+        }
         do{
             String horas = cursor.getString(1).substring(0,2);
             String minutos = cursor.getString(1).substring(3,5);
@@ -54,5 +59,11 @@ public class AcessoBD {
         database.close();
         cursor.close();
         return resultSet;
+    }
+
+    public boolean isValidRA (String RA){
+        Cursor cursor = database.rawQuery("SELECT * FROM alunos WHERE RA = \"" + RA + "\"",null);
+
+        return(cursor.getCount()>0);
     }
 }

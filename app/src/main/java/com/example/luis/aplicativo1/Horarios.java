@@ -2,8 +2,10 @@ package com.example.luis.aplicativo1;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import com.example.luis.aplicativo1.R;
@@ -49,8 +52,9 @@ public class Horarios extends Fragment {
 
         AcessoBD dbAcesso = AcessoBD.getInstance(this.getContext());
         dbAcesso.open();
-
-        ArrayList<Aula> resultSet = dbAcesso.getAulas("11008415");
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        String RA = sharedPrefs.getString("RA", "");
+        ArrayList<Aula> resultSet = dbAcesso.getAulas(RA);
 
         aulas = new ArrayList<Aula>();
         int j = 0;

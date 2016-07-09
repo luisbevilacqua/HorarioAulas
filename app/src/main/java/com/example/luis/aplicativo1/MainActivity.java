@@ -1,6 +1,10 @@
 package com.example.luis.aplicativo1;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -37,14 +41,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        int hour = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        Toast.makeText(this,"Hora: " + hour, Toast.LENGTH_SHORT).show();
+        //int hour = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        //Toast.makeText(this,"Hora: " + hour, Toast.LENGTH_SHORT).show();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -135,5 +140,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onCardClick(View view){
         Toast.makeText(this,"Teste",Toast.LENGTH_SHORT).show();
+    }
+    public void logout(View view){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sharedPreferences.edit().clear().commit();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
