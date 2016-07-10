@@ -66,4 +66,27 @@ public class AcessoBD {
 
         return(cursor.getCount()>0);
     }
+
+    public ArrayList<Fretado> getFretados(String origem, String destino, String dia){
+        ArrayList<Fretado> resultSet = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM fretados WHERE Origem = \""+origem+"\" AND Destino = \""+destino+"\" AND Dia = \""+dia+"\" ORDER BY Partida;",null);
+        cursor.moveToFirst();
+        if(cursor.getCount()==0){
+            Fretado fretado = new Fretado("1","00:00","STA","00:00","STA");
+            resultSet.add(fretado);
+            return resultSet;
+        }
+        do{
+            String linha = cursor.getString(5);
+            String partida = cursor.getString(3);
+            String chegada = cursor.getString(4);
+            String localOrigem = cursor.getString(1);
+            String localDestino = cursor.getString(2);
+            Fretado fretado = new Fretado(linha,partida,localOrigem,chegada,localDestino);
+            resultSet.add(fretado);
+        }while (cursor.moveToNext());
+        database.close();
+        cursor.close();
+        return resultSet;
+    }
 }

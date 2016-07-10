@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view = "http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:onClick="onCardClick"
+        android:foreground="?android:attr/selectableItemBackground"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Linha 1"
+                android:id="@+id/numeroLinha"
+                android:layout_toRightOf="@+id/fretadoFavicon"
+                android:layout_toEndOf="@+id/fretadoFavicon"
+                android:layout_marginLeft="5dp"
+                android:layout_alignBottom="@id/fretadoFavicon"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fretadoFavicon"
+                android:src="@drawable/ic_directions_bus_black2_24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <RelativeLayout
+                android:id="@+id/destino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="8:34"
+                    android:id="@+id/horarioChegada"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Sao Bernardo"
+                    android:id="@+id/localChegada"
+                    android:layout_below="@+id/horarioChegada"
+                    android:textAlignment="center"
+                    />
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/seta"
+                android:src="@drawable/ic_trending_flat_black_24dp"
+
+                android:layout_gravity="center"
+                android:layout_alignTop="@+id/relativeLayout"
+                android:layout_toLeftOf="@+id/destino"
+                android:layout_toStartOf="@+id/destino" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/destino"
+                android:layout_toLeftOf="@+id/seta"
+                android:layout_toStartOf="@+id/seta"
+                android:id="@+id/relativeLayout">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="7:53"
+                    android:id="@+id/horarioPartida"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAlignment="center"
+                    android:text="Expedicionários"
+                    android:id="@+id/localPartida"
+                    android:layout_below="@+id/horarioPartida"
+                     />
+                </RelativeLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

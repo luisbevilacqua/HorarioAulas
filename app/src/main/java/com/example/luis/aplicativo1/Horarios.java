@@ -69,7 +69,6 @@ public class Horarios extends Fragment {
             j++;
         }
 
-        dbAcesso.close();
         adapter = new MyAdapter(aulas, MyData.tipo);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(

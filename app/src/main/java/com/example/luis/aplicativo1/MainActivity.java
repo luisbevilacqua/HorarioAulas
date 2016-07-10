@@ -1,6 +1,5 @@
 package com.example.luis.aplicativo1;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,18 +12,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -98,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HamburguerMenu(), "Menu");
         adapter.addFragment(new Horarios(), "Horários");
-        adapter.addFragment(new Fretados(), "Fretados");
+        adapter.addFragment(new FragmentFretados(), "FragmentFretados");
         adapter.addFragment(new RestauranteUniversitario(), "Restaurante Universitario");
         viewPager.setAdapter(adapter);
     }
