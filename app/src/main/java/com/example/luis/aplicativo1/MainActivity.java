@@ -1,8 +1,10 @@
 package com.example.luis.aplicativo1;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,7 +16,15 @@ import android.os.Bundle;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -54,7 +64,73 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void abrirOpcoes(View v){
+        final View tb1 = findViewById(R.id.toolbarOpcoes);
+        final View tb2 = findViewById(R.id.toolbarNormal);
+        int cx = (tb2.getLeft()+ tb2.getRight());
+        int cy = (tb2.getTop() + tb2.getBottom())/2;
+        int finalRadius = Math.max(tb2.getWidth(),tb2.getHeight());
+        if(viewPager.getCurrentItem()!=0){
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                Animator anim = ViewAnimationUtils.createCircularReveal(tb1,cx,cy,0,finalRadius);
+                anim.setDuration(200);
+                anim.setInterpolator(new AccelerateDecelerateInterpolator());
+                tb1.setVisibility(View.VISIBLE);
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.parseColor("#9E9E9E"));
+                anim.start();
+            }
+            switch(viewPager.getCurrentItem()) {
+                case 1:
+                    Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Semanas,android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+                    break;
+            }
+        }
+    }
+    public void confirmaOpcoes(View v){
+        final View tb1 = findViewById(R.id.toolbarOpcoes);
+        final View tb2 = findViewById(R.id.toolbarNormal);
+        int cx = (tb1.getLeft()+ tb1.getRight());
+        int cy = (tb1.getTop() + tb1.getBottom())/2;
+        int finalRadius = Math.max(tb2.getWidth(),tb2.getHeight());
+        if(true){
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                Animator anim = ViewAnimationUtils.createCircularReveal(tb1,cx,cy,finalRadius,0);
+                anim.setDuration(200);
+                anim.setInterpolator(new AccelerateDecelerateInterpolator());
+                anim.start();
+                anim.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
 
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Window window = getWindow();
+                        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            window.setStatusBarColor(Color.parseColor("#388E3C"));
+                        }
+                        tb1.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+            }
+
+        }
     }
 
     private void setupTabIcons() {
@@ -79,10 +155,12 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position){
 
             }
-
             @Override
             public void onPageScrollStateChanged(int state){
-
+                if(state==1) {
+                    View v = findViewById(R.id.confirmar);
+                    confirmaOpcoes(v);
+                }
             }
         });
     }
