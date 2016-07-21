@@ -23,6 +23,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -90,13 +91,51 @@ public class MainActivity extends AppCompatActivity {
                     spinner3.setVisibility(View.GONE);
                     break;
                 case 2:
-                    Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-                    ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.Lugares,android.R.layout.simple_spinner_item);
+                    final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+                    final ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.Lugares,android.R.layout.simple_spinner_item);
                     adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner1.setAdapter(adapter1);
                     final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
                     spinner2.setVisibility(View.VISIBLE);
-                    spinner2.setAdapter(adapter1);
+                    final ArrayAdapter<String> adapterSpinnerDestino = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,android.R.id.text1);
+                    spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                            adapterSpinnerDestino.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            adapterSpinnerDestino.clear();
+                            switch(spinner1.getSelectedItem().toString()){
+                                case "STA":
+                                    adapterSpinnerDestino.add("TML");
+                                    adapterSpinnerDestino.add("SBC");
+                                break;
+                                case "SBC":
+                                    adapterSpinnerDestino.add("STA");
+                                    adapterSpinnerDestino.add("TSB");
+                                    adapterSpinnerDestino.add("TML");
+                                    adapterSpinnerDestino.add("PCE");
+                                break;
+                                case "TSB":
+                                    adapterSpinnerDestino.add("SBC");
+                                    adapterSpinnerDestino.add("PCE");
+                                break;
+                                case "TML":
+                                    adapterSpinnerDestino.add("STA");
+                                    adapterSpinnerDestino.add("SBC");
+                                break;
+                                case "PCE":
+                                    adapterSpinnerDestino.add("SBC");
+                                    adapterSpinnerDestino.add("TSB");
+                                break;
+                            }
+                            spinner2.setAdapter(adapterSpinnerDestino);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
                     break;
             }
         }
