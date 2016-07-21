@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import com.example.luis.aplicativo1.R;
 
 
@@ -54,20 +56,19 @@ public class Horarios extends Fragment {
         dbAcesso.open();
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         String RA = sharedPrefs.getString("RA", "");
-        ArrayList<Aula> resultSet = dbAcesso.getAulas(RA);
 
-        aulas = new ArrayList<Aula>();
-        int j = 0;
-        for(int i = 0; i < resultSet.size(); i++){
-            if(i==0||!resultSet.get(i).getDia().equals(resultSet.get(i-1).getDia())){
-                aulas.add(new Aula("","","","","",resultSet.get(i).getDia().substring(0,1).toUpperCase()+resultSet.get(i).getDia().substring(1)));
-                MyData.tipo[j]=1;
-                j++;
-            }
-            aulas.add(resultSet.get(i));
-            MyData.tipo[j] = 0;
-            j++;
+        String quinzenal;
+        int semana = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+        if(semana % 2 == 0){
+            quinzenal = "quinzenal 1";
         }
+        else{
+            quinzenal = "quinzenal 2";
+        }
+
+        ArrayList<Aula> resultSet = dbAcesso.getAulas(RA, quinzenal);
+
+        setarTipos(resultSet);
 
         adapter = new MyAdapter(aulas, MyData.tipo);
         recyclerView.setAdapter(adapter);
@@ -87,5 +88,21 @@ public class Horarios extends Fragment {
     public void onResume(){
         super.onResume();
        // recyclerView.smoothScrollToPosition(12);
+    }
+
+    public ArrayList<Aula> setarTipos(ArrayList<Aula> resultSet){
+        aulas = new ArrayList<Aula>();
+        int j = 0;
+        for(int i = 0; i < resultSet.size(); i++){
+            if(i==0||!resultSet.get(i).getDia().equals(resultSet.get(i-1).getDia())){
+                aulas.add(new Aula("","","","","",resultSet.get(i).getDia().substring(0,1).toUpperCase()+resultSet.get(i).getDia().substring(1)));
+                MyData.tipo[j]=1;
+                j++;
+            }
+            aulas.add(resultSet.get(i));
+            MyData.tipo[j] = 0;
+            j++;
+        }
+        return aulas;
     }
 }

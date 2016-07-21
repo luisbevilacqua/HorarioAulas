@@ -86,8 +86,58 @@ public class MainActivity extends AppCompatActivity {
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Semanas,android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(adapter);
+                    Spinner spinner3 = (Spinner) findViewById(R.id.spinner2);
+                    spinner3.setVisibility(View.GONE);
+                    break;
+                case 2:
+                    Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+                    ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.Lugares,android.R.layout.simple_spinner_item);
+                    adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner1.setAdapter(adapter1);
+                    final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+                    spinner2.setVisibility(View.VISIBLE);
+                    spinner2.setAdapter(adapter1);
                     break;
             }
+        }
+    }
+    public void confirmaOpcoes(int tipo){
+        final View tb1 = findViewById(R.id.toolbarOpcoes);
+        final View tb2 = findViewById(R.id.toolbarNormal);
+        int cx = (tb1.getLeft()+ tb1.getRight());
+        int cy = (tb1.getTop() + tb1.getBottom())/2;
+        int finalRadius = Math.max(tb2.getWidth(),tb2.getHeight());
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Animator anim = ViewAnimationUtils.createCircularReveal(tb1,cx,cy,finalRadius,0);
+            anim.setDuration(200);
+            anim.setInterpolator(new AccelerateDecelerateInterpolator());
+            anim.start();
+            anim.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    Window window = getWindow();
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        window.setStatusBarColor(Color.parseColor("#388E3C"));
+                    }
+                    tb1.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
         }
     }
     public void confirmaOpcoes(View v){
@@ -96,6 +146,35 @@ public class MainActivity extends AppCompatActivity {
         int cx = (tb1.getLeft()+ tb1.getRight());
         int cy = (tb1.getTop() + tb1.getBottom())/2;
         int finalRadius = Math.max(tb2.getWidth(),tb2.getHeight());
+        if(viewPager.getCurrentItem()==2) {
+            AcessoBD dbAcesso = AcessoBD.getInstance(this);
+            dbAcesso.open();
+            Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+            Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+            ArrayList<Fretado> fretados = dbAcesso.getFretados(spinner.getSelectedItem().toString(), spinner2.getSelectedItem().toString(), "semana");
+            RecyclerView rvFretados = (RecyclerView) findViewById(R.id.fretados_recycler);
+            RecyclerView.Adapter adaptador = new AdaptadorFretados(fretados);
+            rvFretados.swapAdapter(adaptador, true);
+        }else if(viewPager.getCurrentItem()==1){
+            AcessoBD dbAcesso = AcessoBD.getInstance(this);
+            dbAcesso.open();
+            Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String RA = sharedPrefs.getString("RA", "");
+            String semana;
+            if(spinner.getSelectedItem().toString().equals("Semana 1")){
+                semana = "quinzenal 1";
+            }
+            else{
+                semana = "quinzenal 2";
+            }
+            ArrayList<Aula> aulas = dbAcesso.getAulas(RA, semana);
+            RecyclerView rvAulas = (RecyclerView) findViewById(R.id.my_recycler_view);
+            Horarios hr = new Horarios();
+            aulas = hr.setarTipos(aulas);
+            RecyclerView.Adapter adaptador = new MyAdapter(aulas, MyData.tipo);
+            rvAulas.swapAdapter(adaptador, true);
+        }
         if(true){
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 Animator anim = ViewAnimationUtils.createCircularReveal(tb1,cx,cy,finalRadius,0);
@@ -158,8 +237,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageScrollStateChanged(int state){
                 if(state==1) {
-                    View v = findViewById(R.id.confirmar);
-                    confirmaOpcoes(v);
+                    confirmaOpcoes(0);
                 }
             }
         });

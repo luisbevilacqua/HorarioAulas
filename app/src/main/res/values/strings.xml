@@ -7,4 +7,11 @@
         <item>Semana 1</item>
         <item>Semana 2</item>
     </string-array>
+    <string-array name="Lugares">
+        <item>STA</item>
+        <item>SBC</item>
+        <item>TSB</item>
+        <item>TML</item>
+        <item>PCE</item>
+    </string-array>
 </resources>

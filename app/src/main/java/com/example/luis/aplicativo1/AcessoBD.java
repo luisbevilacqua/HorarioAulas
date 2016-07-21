@@ -36,8 +36,8 @@ public class AcessoBD {
         }
     }
 
-    public ArrayList<Aula> getAulas(String RA){
-        Cursor cursor = database.rawQuery("SELECT nomeDisciplina, Hora, Dia, Professor, Sala FROM aulas, matriculas, disciplina WHERE matriculas.RA = \""+ RA +"\" AND aulas.codDisciplina = matriculas.codDisciplina AND matriculas.codDisciplina = disciplina.codDisciplina " +
+    public ArrayList<Aula> getAulas(String RA, String semana){
+        Cursor cursor = database.rawQuery("SELECT nomeDisciplina, Hora, Dia, Professor, Sala FROM aulas, matriculas, disciplina WHERE matriculas.RA = \""+ RA +"\" AND aulas.codDisciplina = matriculas.codDisciplina AND matriculas.codDisciplina = disciplina.codDisciplina AND (Semana = 'semanal' OR Semana = '" + semana + "')" +
                 "ORDER BY (CASE WHEN Dia = 'segunda' THEN 1 WHEN Dia = 'terca' THEN 2 WHEN Dia = 'quarta' THEN 3 WHEN Dia = 'quinta' THEN 4 WHEN Dia = 'sexta' THEN 5 WHEN Dia = 'sabado' THEN 6 END), Hora;",null);
         cursor.moveToFirst();
         ArrayList<Aula> resultSet = new ArrayList<>();
