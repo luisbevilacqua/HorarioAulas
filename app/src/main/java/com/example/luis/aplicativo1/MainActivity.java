@@ -372,4 +372,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void irParaConfiguracoes(View view){
+        Toast.makeText(this, "Nada para ser configurado ainda!",Toast.LENGTH_SHORT).show();
+    }
+    public void irParaRU(View view){
+        viewPager.setCurrentItem(3,true);
+    }
+    public void irParaHorarios(View view){
+        viewPager.setCurrentItem(1,true);
+    }
+    public void irParaFretados(View view){
+        viewPager.setCurrentItem(2,true);
+    }
 }
