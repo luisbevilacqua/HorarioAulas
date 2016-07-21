@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private static ArrayList<Aula> aulas;
     private static RecyclerView.Adapter adapter;
     private int[] tipo = new int[50];
+    private int item_origem_atual = 0;
+    private int item_destino_atual = 0;
+    private int item_semana_atual = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR)%2;
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -89,18 +93,38 @@ public class MainActivity extends AppCompatActivity {
                     spinner.setAdapter(adapter);
                     Spinner spinner3 = (Spinner) findViewById(R.id.spinner2);
                     spinner3.setVisibility(View.GONE);
+                    spinner.setSelection(item_semana_atual);
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            item_semana_atual = position;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
                     break;
                 case 2:
                     final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
                     final ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.Lugares,android.R.layout.simple_spinner_item);
                     adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner1.setAdapter(adapter1);
+                    spinner1.setSelection(item_origem_atual);
+
                     final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
                     spinner2.setVisibility(View.VISIBLE);
+
                     final ArrayAdapter<String> adapterSpinnerDestino = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,android.R.id.text1);
                     spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            if(position!=item_origem_atual){
+                                item_origem_atual = position;
+                                item_destino_atual = 0;
+                            }
 
                             adapterSpinnerDestino.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             adapterSpinnerDestino.clear();
@@ -129,6 +153,18 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             }
                             spinner2.setAdapter(adapterSpinnerDestino);
+                            spinner2.setSelection(item_destino_atual);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                    spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            item_destino_atual = position;
                         }
 
                         @Override

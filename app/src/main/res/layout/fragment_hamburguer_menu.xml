@@ -1,19 +1,135 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="20dp"
     tools:context="com.example.luis.aplicativo1.HamburguerMenu">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:elevation="-20dp"
-        android:layout_margin="20dp"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="logout"
+        android:layout_height="100dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/materialtest"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_query_builder_black2_24dp"
+        android:id="@+id/imageHorarios"
+        android:layout_alignTop="@+id/btnHorarios"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="60dp"
+        android:text="Minhas aulas"
+        android:id="@+id/btnHorarios"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textSize="14sp"/>
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_directions_bus_black2_24dp"
+        android:id="@+id/imageFretado"
+        android:layout_alignTop="@+id/btnFretado"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="60dp"
+        android:text="Fretados"
+        android:id="@+id/btnFretado"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_below="@+id/imageHorarios"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_restaurant_menu_black2_24dp"
+        android:id="@+id/imageRestaurante"
+        android:layout_alignTop="@+id/btnRestaurante"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="60dp"
+        android:text="Restaurante Universitário"
+        android:id="@+id/btnRestaurante"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_below="@+id/imageFretado"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_settings_black_24dp"
+        android:id="@+id/imageConfiguracoes"
+        android:layout_alignTop="@+id/btnConfiguracoes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="60dp"
+        android:text="Configurações"
+        android:id="@+id/btnConfiguracoes"
+        android:onClick="logout"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_below="@+id/btnRestaurante"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_exit_to_app_black_24dp"
+        android:id="@+id/imageView3"
+        android:layout_alignTop="@+id/btnLogout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="60dp"
+        android:text="Logout"
         android:id="@+id/btnLogout"
         android:onClick="logout"
-        android:clickable="true" />
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_below="@+id/btnConfiguracoes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-</FrameLayout>
+</RelativeLayout>
