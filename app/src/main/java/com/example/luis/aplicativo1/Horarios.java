@@ -28,7 +28,7 @@ public class Horarios extends Fragment {
     private static RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private static ArrayList<Aula> aulas;
-    private static RecyclerView.Adapter adapter;
+    private static MyAdapter adapter;
     private int[] tipo = new int[50];
 
     public Horarios() {
@@ -119,6 +119,8 @@ public class Horarios extends Fragment {
                         @Override
                         public void onItemClick(View view, int position){
                             Log.d("DEBUG", "Chegou! Item: " + position);
+                            Aula aula = adapter.getItem(position);
+                            Toast.makeText(context, aula.getDisciplina(), Toast.LENGTH_SHORT).show();
                         }
                     })
             );
