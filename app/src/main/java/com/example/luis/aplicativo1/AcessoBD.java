@@ -85,8 +85,8 @@ public class AcessoBD {
             Fretado fretado = new Fretado(linha,partida,localOrigem,chegada,localDestino);
             resultSet.add(fretado);
         }while (cursor.moveToNext());
-        database.close();
-        cursor.close();
+        //database.close();
+        //cursor.close();
         return resultSet;
     }
 }
