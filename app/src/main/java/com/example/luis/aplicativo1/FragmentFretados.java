@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,10 @@ public class FragmentFretados extends Fragment {
         super.onResume();
         PopularFretados popularFretados = new PopularFretados(getContext());
         popularFretados.execute();
+    }
+
+    public void scrollToNext(View view){
+        Toast.makeText(getContext(),"TESTE",Toast.LENGTH_SHORT).show();
     }
 
     public class PopularFretados extends AsyncTask<String, Void, String>{

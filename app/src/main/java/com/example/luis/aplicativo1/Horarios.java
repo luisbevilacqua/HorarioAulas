@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -119,7 +120,8 @@ public class Horarios extends Fragment {
                         @Override
                         public void onItemClick(View view, int position){
                             Log.d("DEBUG", "Chegou! Item: " + position);
-                            Aula aula = adapter.getItem(position);
+                            MyAdapter currentAdapter = (MyAdapter) recyclerView.getAdapter();
+                            Aula aula = currentAdapter.getItem(position);
                             Toast.makeText(context, aula.getDisciplina(), Toast.LENGTH_SHORT).show();
                         }
                     })

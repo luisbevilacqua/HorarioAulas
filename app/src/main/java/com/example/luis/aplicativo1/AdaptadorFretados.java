@@ -89,6 +89,18 @@ public class AdaptadorFretados extends RecyclerView.Adapter<AdaptadorFretados.My
         return local;
     }
 
+    public int getNextDepartureID(){
+        int id = 0;
+        for(int x = 0; x< fretados.size(); x++){
+            if(Integer.parseInt(fretados.get(x).getHorarioPartida().substring(0,2))> Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+                    || (Integer.parseInt(fretados.get(x).getHorarioPartida().substring(3,5))> Calendar.getInstance().get(Calendar.MINUTE)
+                    && Integer.parseInt(fretados.get(x).getHorarioPartida().substring(0,2))== Calendar.getInstance().get(Calendar.HOUR_OF_DAY))){
+                return x;
+            }
+        }
+        return id;
+    }
+
     @Override
     public int getItemCount() {
         return fretados.size();

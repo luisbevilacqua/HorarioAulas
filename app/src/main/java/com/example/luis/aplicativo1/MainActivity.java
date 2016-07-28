@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -176,6 +177,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void scrollToNext(View view){
+        RecyclerView rv = (RecyclerView) findViewById(R.id.fretados_recycler);
+        AdaptadorFretados adaptadorFretados = (AdaptadorFretados) rv.getAdapter();
+        rv.smoothScrollToPosition(adaptadorFretados.getNextDepartureID());
+    }
+
     public void confirmaOpcoes(int tipo){
         final View tb1 = findViewById(R.id.toolbarOpcoes);
         final View tb2 = findViewById(R.id.toolbarNormal);
@@ -307,7 +315,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position){
-
+                FloatingActionButton fabFretados = (FloatingActionButton)findViewById(R.id.FretadoFAB);
+                if(position==2){
+                    fabFretados.show();
+                }
+                else{
+                    fabFretados.hide();
+                }
             }
             @Override
             public void onPageScrollStateChanged(int state){
