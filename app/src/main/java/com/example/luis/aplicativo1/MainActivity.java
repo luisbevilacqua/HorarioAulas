@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
             switch(viewPager.getCurrentItem()) {
                 case 1:
                     Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Semanas,android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Semanas,R.layout.spinner_item);
+                    adapter.setDropDownViewResource(R.layout.spinner_item);
                     spinner.setAdapter(adapter);
                     Spinner spinner3 = (Spinner) findViewById(R.id.spinner2);
                     spinner3.setVisibility(View.GONE);
@@ -110,15 +110,15 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-                    final ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.Lugares,android.R.layout.simple_spinner_item);
-                    adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    final ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.Lugares,R.layout.spinner_item);
+                    adapter1.setDropDownViewResource(R.layout.spinner_item);
                     spinner1.setAdapter(adapter1);
                     spinner1.setSelection(item_origem_atual);
 
                     final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
                     spinner2.setVisibility(View.VISIBLE);
 
-                    final ArrayAdapter<String> adapterSpinnerDestino = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,android.R.id.text1);
+                    final ArrayAdapter<CharSequence> adapterSpinnerDestino = new ArrayAdapter<CharSequence>(this,R.layout.spinner_item,R.id.spinner_texto);
                     spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                                 item_destino_atual = 0;
                             }
 
-                            adapterSpinnerDestino.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            adapterSpinnerDestino.setDropDownViewResource(R.layout.spinner_item);
                             adapterSpinnerDestino.clear();
                             switch(spinner1.getSelectedItem().toString()){
                                 case "STA":
