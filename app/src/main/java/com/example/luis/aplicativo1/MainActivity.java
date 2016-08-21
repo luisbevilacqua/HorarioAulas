@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -182,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rv = (RecyclerView) findViewById(R.id.fretados_recycler);
         AdaptadorFretados adaptadorFretados = (AdaptadorFretados) rv.getAdapter();
         rv.smoothScrollToPosition(adaptadorFretados.getNextDepartureID());
+        //rv.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(this));
+        //rv.smoothScrollToPosition(adaptadorFretados.getNextDepartureID());
     }
 
     public void confirmaOpcoes(int tipo){
